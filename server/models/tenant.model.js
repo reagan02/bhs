@@ -18,5 +18,3 @@ export const Tenant = sequelize.define(
 		timestamps: true,
 	}
 );
-console.log(Tenant === sequelize.models.Tenant);
-
