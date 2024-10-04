@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createTenant, getTenants } from "../controllers/tenant.controller.js";
+import { createTenant, getTenants } from "../controller/tenant.controller.js";
 
 const router = Router();
 
