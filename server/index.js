@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import tenantRoute from "./routes/tenant.route.js";
-import db from "./config/connect_db.js";
 import dotenv from "dotenv";
+import connection from "./database/dbConnection.js";
 const app = express();
 
 dotenv.config();
@@ -18,4 +18,12 @@ app.get("/", (req, res) => {
 	res.send("Welcome to the Boarding House Management System API");
 });
 
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+try {
+	connection.query("SELECT 1");
+	console.log("Database connected");
+	app.listen(PORT, () => {
+		console.log(`Server is running on port ${PORT}`);
+	});
+} catch (error) {
+	console.log("Failed to connect to the database", error);
+}

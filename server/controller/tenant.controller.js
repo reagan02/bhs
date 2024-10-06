@@ -1,17 +1,13 @@
-import { Tenant } from "../models/tenant.model.js";
+import db from "../database/dbConnection.js";
 
 export const getTenants = async (req, res) => {
-	res.send("Get all tenants");
-};
-
-export const createTenant = async (req, res) => {
-	await Tenant.sync();
 	try {
-		const jane = Tenant.build({ firstName: "Jane", lastName: "Doe" });
-		await jane.save();
-		console.log(jane.toJSON());
-		res.send("Create tenant");
+		const tenants = await db.query("SELECT * FROM Tenants");
+		res.status(200).json(tenants);
 	} catch (error) {
-		console.error(error);
+		console.error("Failed to get tenants:", error);
+		res.status(500).send("Internal Server Error");
 	}
 };
+
+export const createTenant = async (req, res) => {};
