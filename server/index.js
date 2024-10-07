@@ -4,12 +4,14 @@ import path from "path";
 import tenantRoute from "./routes/tenant.route.js";
 import dotenv from "dotenv";
 import connection from "./database/dbConnection.js";
+import login from "./admin/login.js";
 const app = express();
 
 dotenv.config();
 
 app.use(express.json());
 app.use("/api/tenants", tenantRoute);
+app.use("/login", login);
 
 const PORT = process.env.PORT;
 
